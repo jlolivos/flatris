@@ -1,7 +1,7 @@
 module.exports = {
   parser: '@babel/eslint-parser',
   parserOptions: {
-    requireConfigFile: false, // allows parsing without a babelrc
+    requireConfigFile: false,
     babelOptions: {
       presets: ['@babel/preset-flow']
     }
@@ -20,49 +20,8 @@ module.exports = {
     node: true,
     jest: true
   },
-  settings: {
-    'import/resolver': {
-      'babel-module': {}
-    }
-  },
-  globals: {
-    global: true,
-    process: true
-  },
   rules: {
     'no-console': 'off',
     'flowtype/generic-spacing': 'off'
-  },
-  overrides: [
-    {
-      files: [
-        '.eslintrc.js',
-        'babel.config.js',
-        'jest.config.js',
-        'jest.framework-setup.js',
-        'web/next.config.js',
-        'server/**/*.js'
-      ],
-      env: {
-        node: true
-      }
-    },
-    {
-      files: ['**/*.test.js'],
-      env: {
-        jest: true
-      }
-    },
-    {
-      files: [
-        'web/components/**/*.js',
-        'web/pages/**/*.js',
-        'web/mocks/**/*.js'
-      ],
-      rules: {
-        'react/jsx-uses-react': 'error',
-        'react/jsx-uses-vars': 'error'
-      }
-    }
-  ]
+  }
 };
