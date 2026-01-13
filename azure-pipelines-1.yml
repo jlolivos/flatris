@@ -15,6 +15,12 @@ steps:
     versionSpec: '18.x'
   displayName: 'Install Node.js'
 
+# Force upgrade ESLint and add Flow present
+- script: |
+    npm install eslint@latest --save-dev 
+    npm install @babel/preset-flow --save-dev 
+  displayName: 'Upgrade ESLint and add Flow preset'
+
 - script: |
     rm -rf node_modules package-lock.json
     npm install --include=dev --legacy-peer-deps
