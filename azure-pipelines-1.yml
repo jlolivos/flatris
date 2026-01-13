@@ -17,6 +17,6 @@ steps:
 
 - script: |
     rm -rf node_modules package-lock.json
-    npm ci
+    npm install --include=dev
     npm run build
   displayName: 'npm install and build'
