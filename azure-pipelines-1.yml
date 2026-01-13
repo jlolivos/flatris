@@ -1,28 +1,30 @@
-# Node.js with React
-# Build a Node.js project that uses React.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
-
 trigger:
 - master
 
 pool:
-  name: ubuntu-latest
+  name: ubuntu-latest   
 
 steps:
+# 1. Install Node.js
 - task: NodeTool@0
   inputs:
     versionSpec: '18.x'
   displayName: 'Install Node.js'
 
-# Force upgrade ESLint and add Flow present
+# 2. Upgrade ESLint and add Flow preset (with legacy peer deps)
 - script: |
-    npm install eslint@latest --save-dev 
-    npm install @babel/preset-flow --save-dev 
+    npm install eslint@latest --save-dev --legacy-peer-deps
+    npm install @babel/preset-flow --save-dev --legacy-peer-deps
   displayName: 'Upgrade ESLint and add Flow preset'
 
+# 3. Clean, install, and build
 - script: |
     rm -rf node_modules package-lock.json
     npm install --include=dev --legacy-peer-deps
     npm run build
   displayName: 'npm install and build'
+
+# 4. (Optional) Run lint check so pipeline fails early if ESLint errors exist
+- script: |
+    npx eslint . --ext .js,.jsx,.ts,.tsx
+  displayName: 'Run ESLint'
