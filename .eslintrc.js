@@ -1,15 +1,24 @@
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
+  parserOptions: {
+    requireConfigFile: false, // allows parsing without a babelrc
+    babelOptions: {
+      presets: ['@babel/preset-flow']
+    }
+  },
   extends: [
     'eslint:recommended',
     'plugin:import/errors',
     'plugin:import/warnings',
-    'plugin:flowtype/recommended'
+    'plugin:flowtype/recommended',
+    'plugin:react/recommended'
   ],
   plugins: ['react', 'flowtype'],
   env: {
     es6: true,
-    'shared-node-browser': true
+    browser: true,
+    node: true,
+    jest: true
   },
   settings: {
     'import/resolver': {
@@ -54,9 +63,6 @@ module.exports = {
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error'
       }
-    },
-    {
-      files: ['**/__fixtures__/**/*.js']
     }
   ]
 };
