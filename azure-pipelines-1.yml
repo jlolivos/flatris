@@ -17,6 +17,6 @@ steps:
 
 - script: |
     rm -rf node_modules package-lock.json
-    npm install --include=dev
+    npm install --include=dev --legacy-peer-deps
     npm run build
   displayName: 'npm install and build'
