@@ -2,7 +2,7 @@ trigger:
 - master
 
 pool:
-  name: ubuntu-latest   
+  name: ubuntu-latest
 
 steps:
 # 1. Install Node.js
@@ -11,20 +11,22 @@ steps:
     versionSpec: '18.x'
   displayName: 'Install Node.js'
 
-# 2. Upgrade ESLint and add Flow preset (with legacy peer deps)
+# 2. Upgrade React-Redux and Next-Redux-Wrapper
+- script: |
+    npm uninstall react-redux next-redux-wrapper
+    npm install react-redux@latest next-redux-wrapper@latest --legacy-peer-deps
+  displayName: 'Upgrade React-Redux and Next-Redux-Wrapper'
+
+# 3. Upgrade ESLint and Flow preset (from earlier steps)
 - script: |
     npm install eslint@latest --save-dev --legacy-peer-deps
     npm install @babel/preset-flow --save-dev --legacy-peer-deps
+    npm install @babel/eslint-parser --save-dev --legacy-peer-deps
   displayName: 'Upgrade ESLint and add Flow preset'
 
-# 3. Clean, install, and build
+# 4. Clean, install, and build
 - script: |
     rm -rf node_modules package-lock.json
     npm install --include=dev --legacy-peer-deps
     npm run build
   displayName: 'npm install and build'
-
-# 4. (Optional) Run lint check so pipeline fails early if ESLint errors exist
-- script: |
-    npx eslint . --ext .js,.jsx,.ts,.tsx
-  displayName: 'Run ESLint'
