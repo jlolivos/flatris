@@ -33,7 +33,7 @@ steps:
 
 # Empaquetar artefacto Next
 - script: |
-    mkdir -p artifacts
+    sudo mkdir -p artifacts
     zip -r artifacts/flatris_build.zip web/.next web/public package.json
   displayName: 'Zip artifact'
 
