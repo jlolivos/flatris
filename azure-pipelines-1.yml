@@ -31,23 +31,13 @@ steps:
     npm run build
   displayName: 'npm install and build'
 
-# Empaquetar en ZIP
-# Instalar y generar build dentro de /web
+# Empaquetar artefacto Next
 - script: |
-    cd web
-    npm install
-    npm run build
-  displayName: 'Build React in web folder'
-
-# Crear ZIP
-- script: |
-    cd web
-    mkdir -p ../artifacts
-    zip -r ../artifacts/react_build.zip dist/
+    mkdir -p artifacts
+    zip -r artifacts/flatris_build.zip web/.next web/public package.json
   displayName: 'Zip artifact'
 
-# Copiar a ruta local del agente
 - script: |
     mkdir -p /opt/devops/artifacts
-    cp artifacts/react_build.zip /opt/devops/artifacts/
-  displayName: 'Copy artifact to local directory'
+    cp artifacts/flatris_build.zip /opt/devops/artifacts/
+  displayName: 'Copy artifact'
