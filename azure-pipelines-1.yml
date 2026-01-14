@@ -43,7 +43,7 @@ steps:
 - script: |
     cd web
     mkdir -p ../artifacts
-    zip -r ../artifacts/react_build.zip build/
+    zip -r ../artifacts/react_build.zip dist/
   displayName: 'Zip artifact'
 
 # Copiar a ruta local del agente
