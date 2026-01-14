@@ -32,20 +32,21 @@ steps:
   displayName: 'npm install and build'
 
 # Empaquetar en ZIP
+# Instalar y generar build dentro de /web
 - script: |
-     mkdir -p artifacts
-     if [ -d "build" ]; then
-        zip -r artifacts/react_build.zip build
-      elif [ -d "dist" ]; then
-        zip -r artifacts/react_build.zip dist
-      else
-        echo "No build output found!"
-        ls -al
-        exit 1
-      fi
+    cd web
+    npm install
+    npm run build
+  displayName: 'Build React in web folder'
+
+# Crear ZIP
+- script: |
+    cd web
+    mkdir -p ../artifacts
+    zip -r ../artifacts/react_build.zip build/
   displayName: 'Zip artifact'
 
-# Copiar a directorio local del agente
+# Copiar a ruta local del agente
 - script: |
     mkdir -p /opt/devops/artifacts
     cp artifacts/react_build.zip /opt/devops/artifacts/
