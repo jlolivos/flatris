@@ -33,11 +33,6 @@ steps:
 
 # Empaquetar artefacto Next
 - script: |
-    sudo mkdir -p artifacts
+    mkdir -p artifacts
     zip -r artifacts/flatris_build.zip web/.next package.json
   displayName: 'Zip artifact'
-
-- script: |
-    mkdir -p /opt/devops/artifacts
-    cp artifacts/flatris_build.zip /opt/devops/artifacts/
-  displayName: 'Copy artifact'
