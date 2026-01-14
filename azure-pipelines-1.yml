@@ -30,3 +30,15 @@ steps:
     npm install --include=dev --legacy-peer-deps
     npm run build
   displayName: 'npm install and build'
+
+# Empaquetar en ZIP
+- script: |
+    mkdir -p artifacts
+    zip -r artifacts/react_build.zip build/
+  displayName: 'Zip artifact'
+
+# Copiar a directorio local del agente
+- script: |
+    mkdir -p /opt/devops/artifacts
+    cp artifacts/react_build.zip /opt/devops/artifacts/
+  displayName: 'Copy artifact to local directory'
