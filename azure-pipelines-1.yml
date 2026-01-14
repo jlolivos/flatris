@@ -34,7 +34,7 @@ steps:
 # Empaquetar artefacto Next
 - script: |
     sudo mkdir -p artifacts
-    zip -r artifacts/flatris_build.zip web/.next web/public package.json
+    zip -r artifacts/flatris_build.zip web/.next package.json
   displayName: 'Zip artifact'
 
 - script: |
