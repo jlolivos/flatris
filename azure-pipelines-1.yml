@@ -33,8 +33,16 @@ steps:
 
 # Empaquetar en ZIP
 - script: |
-    mkdir -p artifacts
-    zip -r artifacts/react_build.zip build/
+     mkdir -p artifacts
+     if [ -d "build" ]; then
+        zip -r artifacts/react_build.zip build
+      elif [ -d "dist" ]; then
+        zip -r artifacts/react_build.zip dist
+      else
+        echo "No build output found!"
+        ls -al
+        exit 1
+      fi
   displayName: 'Zip artifact'
 
 # Copiar a directorio local del agente
